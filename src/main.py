@@ -10,6 +10,7 @@ def main(page: ft.Page):
         min_extended_width=400,
         leading=ft.FloatingActionButton(icon=ft.icons.CREATE, text="Add"),
         group_alignment=-0.9,
+        bgcolor='#1A2520',
         destinations=[
             ft.NavigationRailDestination(
                 icon=ft.icons.FAVORITE_BORDER, selected_icon=ft.icons.FAVORITE, label="First"
@@ -38,6 +39,8 @@ def main(page: ft.Page):
             expand=True,
         )
     )
+
+    page.bgcolor = '#191C1A'
 
     ''' Implement menu with items [ Switch User, Info Panel, Tasks, Weather Forecast ]
         Implement simple handler ( writing which item clicked )
