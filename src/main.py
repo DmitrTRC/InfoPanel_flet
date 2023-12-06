@@ -46,6 +46,7 @@ def main(page: ft.Page):
         Implement simple handler ( writing which item clicked )
         
         '''
+
     def check_item_clicked(e):
         e.control.checked = not e.control.checked
         page.update()
@@ -61,7 +62,7 @@ def main(page: ft.Page):
             ft.PopupMenuItem(
                 text="Weather forecast", checked=False, on_click=print('Weather forecast')
             )
-                ,
+            ,
 
             ft.PopupMenuItem(
                 content=ft.Row(
@@ -80,6 +81,13 @@ def main(page: ft.Page):
     )
     page.add(pb)
 
+
 ft.app(target=main)
 
 ft.app(target=main, view=ft.AppView.WEB_BROWSER)
+
+''' 
+HomeTask 2
+Move HW1 to separate file PopUpMenu.py
+Create menu from HW1 with ft.NavigationRail class 
+'''
