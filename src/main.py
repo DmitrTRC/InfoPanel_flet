@@ -13,17 +13,21 @@ def main(page: ft.Page):
         bgcolor='#1A2520',
         destinations=[
             ft.NavigationRailDestination(
-                icon=ft.icons.FAVORITE_BORDER, selected_icon=ft.icons.FAVORITE, label="First"
+                icon_content=ft.Icon(ft.icons.ACCOUNT_BOX_SHARP),
+                selected_icon_content=ft.Icon(ft.icons.ACCOUNT_BOX_SHARP),
+                label="Info_panel",
             ),
             ft.NavigationRailDestination(
-                icon_content=ft.Icon(ft.icons.BOOKMARK_BORDER),
+                icon_content=ft.Icon(ft.icons.ANALYTICS),
+                selected_icon_content=ft.Icon(ft.icons.ANALYTICS),
+                label="Backlog_api",
+            ),
+
+
+    ft.NavigationRailDestination(
+                icon_content=ft.Icon(ft.icons.AIR),
                 selected_icon_content=ft.Icon(ft.icons.BOOKMARK),
-                label="Second",
-            ),
-            ft.NavigationRailDestination(
-                icon=ft.icons.SETTINGS_OUTLINED,
-                selected_icon_content=ft.Icon(ft.icons.SETTINGS),
-                label_content=ft.Text("Settings"),
+                label="Weather_forecast",
             ),
         ],
         on_change=lambda e: print("Selected destination:", e.control.selected_index),
@@ -81,8 +85,6 @@ def main(page: ft.Page):
     )
     page.add(pb)
 
-
-ft.app(target=main)
 
 ft.app(target=main, view=ft.AppView.WEB_BROWSER)
 
