@@ -3,9 +3,8 @@ import flet as ft
 from NaviBarApp import NaviBarApp
 
 
-
 def main(page: ft.Page):
-    rail = NaviBarApp(page).build()
+    rail = NaviBarApp(page)
     page.add(
         ft.Row(
             [
@@ -17,11 +16,6 @@ def main(page: ft.Page):
     )
 
     page.bgcolor = '#191C1A'
-
-    def check_item_clicked(e):
-        e.control.checked = not e.control.checked
-        page.update()
-
 
 
 ft.app(target=main)

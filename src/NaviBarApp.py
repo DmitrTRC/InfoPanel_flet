@@ -1,5 +1,6 @@
-from flet import UserControl
 import flet as ft
+
+from flet import UserControl
 
 
 class NaviBarApp(UserControl):
@@ -7,21 +8,24 @@ class NaviBarApp(UserControl):
         super().__init__()
         self.rail = None
         self.page = page
+        self.view = None
 
-        def build(self):
-            self.initialize()
-            self.view = ft.Row(
-                [
-                    self.rail,
-                    ft.VerticalDivider(width=200),
-                ],
-                expand=True
-            )
+    def build(self):
+        self.initialize()
+        self.view = ft.Row(
+            [
+                self.rail,
+                ft.VerticalDivider(width=200),
+            ],
+            expand=True
+        )
+
+        return self.view
+
     def initialize(self):
-        rail = ft.NavigationRail(
+        self.rail = ft.NavigationRail(
             selected_index=0,
             label_type=ft.NavigationRailLabelType.ALL,
-            # extended=True,
             min_width=100,
             min_extended_width=400,
             leading=ft.FloatingActionButton(icon=ft.icons.CREATE, text="Add"),
@@ -41,7 +45,7 @@ class NaviBarApp(UserControl):
                 ft.NavigationRailDestination(
                     icon_content=ft.Icon(ft.icons.ANALYTICS),
                     selected_icon_content=ft.Icon(ft.icons.ANALYTICS),
-                    label="Backlog Api",
+                    label="Task Manager",
                 ),
 
                 ft.NavigationRailDestination(
@@ -52,8 +56,3 @@ class NaviBarApp(UserControl):
             ],
             on_change=lambda e: print("Selected destination:", e.control.selected_index),
         )
-
-
-
-
-
