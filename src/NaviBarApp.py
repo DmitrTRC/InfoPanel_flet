@@ -10,6 +10,10 @@ class NaviBarApp(UserControl):
         self.page = page
         self.view = None
 
+    def menu_choice_manager(self, message):
+        print(f'Selected destination: {message.control.selected_index}')
+        # TODO: Implement reaction for each menu item ( try to use Python match )
+
     def build(self):
         self.initialize()
         self.view = ft.Row(
@@ -54,5 +58,7 @@ class NaviBarApp(UserControl):
                     label="Weather Forecast",
                 ),
             ],
-            on_change=lambda e: print("Selected destination:", e.control.selected_index),
+            on_change=self.menu_choice_manager
+
+            # TODO: HW4 Replace lambda expression to method menu_choice_manager()
         )
