@@ -1,6 +1,7 @@
-from board import Board
 import flet
-from flet.buttons import RoundedRectangleBorder
+
+from board import Board
+
 from flet import (
     UserControl,
     View,

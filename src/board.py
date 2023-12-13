@@ -1,5 +1,4 @@
 import itertools
-
 from flet import (
     UserControl,
     Column,
@@ -20,9 +19,8 @@ from flet import (
     alignment,
     margin
 )
-
-
-# from data_store import DataStore
+from board_list import BoardList
+from data_store import DataStore
 
 
 class Board(UserControl):
@@ -128,7 +126,6 @@ class Board(UserControl):
             else:
                 create_button.disabled = False
             self.page.update()
-
         dialog_text = TextField(label="New List Name",
                                 on_submit=close_dlg, on_change=textfield_change)
         create_button = ElevatedButton(
