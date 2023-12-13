@@ -23,6 +23,7 @@ from flet import (
     theme,
     margin,
     TemplateRoute,
+    TextAlign
 )
 from user import User
 from data_store import DataStore
@@ -30,9 +31,10 @@ from memory_store import InMemoryStore
 from app_layout import AppLayout
 
 
-class TrelloApp(UserControl):
+class InfoApp(UserControl):
     def __init__(self, page: Page, store: DataStore):
         super().__init__()
+        self.layout = None
         self.page = page
         self.store: DataStore = store
         self.page.on_route_change = self.route_change
@@ -47,11 +49,11 @@ class TrelloApp(UserControl):
         self.appbar = AppBar(
             leading=Icon(icons.GRID_GOLDENRATIO_ROUNDED),
             leading_width=100,
-            title=Text(f"Trolli", font_family="Pacifico",
-                       size=32, text_align="start"),
+            title=Text('Info Graph', font_family="Pacifico",
+                       size=32, text_align=TextAlign.START),
             center_title=False,
             toolbar_height=75,
-            bgcolor=colors.LIGHT_BLUE_ACCENT_700,
+            bgcolor=colors.LIGHT_GREEN_ACCENT_700,
             actions=[
                 Container(
                     content=PopupMenuButton(
@@ -66,7 +68,7 @@ class TrelloApp(UserControl):
 
     def build(self):
         self.layout = AppLayout(self, self.page, self.store,
-                                tight=True, expand=True, vertical_alignment="start")
+                                tight=True, expand=True, vertical_alignment=TextAlign.START)
         return self.layout
 
     def initialize(self):
@@ -78,13 +80,13 @@ class TrelloApp(UserControl):
                     self.layout
                 ],
                 padding=padding.all(0),
-                bgcolor=colors.BLUE_GREY_200
+                bgcolor=colors.GREEN_200
             )
         )
         self.page.update()
         # create an initial board for demonstration if no boards
         if len(self.boards) == 0:
-            self.create_new_board("My First Board")
+            self.create_new_board("Task Board")
         self.page.go("/")
 
     def login(self, e):
@@ -123,24 +125,25 @@ class TrelloApp(UserControl):
         self.page.update()
 
     def route_change(self, e):
-        troute = TemplateRoute(self.page.route)
-        if troute.match("/"):
+        t_route = TemplateRoute(self.page.route)
+
+        if t_route.match("/"):
             self.page.go("/boards")
-        elif troute.match("/board/:id"):
-            if int(troute.id) > len(self.store.get_boards()):
+        elif t_route.match("/board/:id"):
+            if int(t_route.id) > len(self.store.get_boards()):
                 self.page.go("/")
                 return
-            self.layout.set_board_view(int(troute.id))
-        elif troute.match("/boards"):
+            self.layout.set_board_view(int(t_route.id))
+        elif t_route.match("/boards"):
             self.layout.set_all_boards_view()
-        elif troute.match("/members"):
+        elif t_route.match("/members"):
             self.layout.set_members_view()
         self.page.update()
 
     def add_board(self, e):
 
         def close_dlg(e):
-            if (hasattr(e.control, "text") and not e.control.text == "Cancel") or (
+            if (hasattr(e.control, "text") and e.control.text != "Cancel") or (
                     type(e.control) is TextField and e.control.value != ""):
                 self.create_new_board(dialog_text.value)
             dialog.open = False
@@ -156,7 +159,7 @@ class TrelloApp(UserControl):
         dialog_text = TextField(label="New Board Name",
                                 on_submit=close_dlg, on_change=textfield_change)
         create_button = ElevatedButton(
-            text="Create", bgcolor=colors.BLUE_200, on_click=close_dlg, disabled=True)
+            text="Create", bgcolor=colors.GREEN_200, on_click=close_dlg, disabled=True)
         dialog = AlertDialog(
             title=Text("Name your new board"),
             content=Column([
@@ -194,8 +197,8 @@ if __name__ == "__main__":
         page.fonts = {
             "Pacifico": "/Pacifico-Regular.ttf"
         }
-        page.bgcolor = colors.BLUE_GREY_200
-        app = TrelloApp(page, InMemoryStore())
+        page.bgcolor = colors.GREEN_200
+        app = InfoApp(page, InMemoryStore())
         page.add(app)
         page.update()
         app.initialize()
