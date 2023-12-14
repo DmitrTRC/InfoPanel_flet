@@ -19,8 +19,9 @@ from flet import (
     border
 )
 from board import Board
-from sidebar import Sidebar
 from data_store import DataStore
+from palette import Palette
+from sidebar import Sidebar
 
 
 class AppLayout(Row):
@@ -38,7 +39,7 @@ class AppLayout(Row):
         self.page.on_resize = self.page_resize
         self.store: DataStore = store
         self.toggle_nav_rail_button = IconButton(
-            icon=icons.ARROW_CIRCLE_LEFT, icon_color=colors.BLUE_GREY_400, selected=False,
+            icon=icons.ARROW_CIRCLE_LEFT, icon_color=Palette.ACCENT_COLOR, selected=False,
             selected_icon=icons.ARROW_CIRCLE_RIGHT, on_click=self.toggle_nav_rail)
         self.sidebar = Sidebar(self, self.store, page)
         self.members_view = Text("members view")
@@ -55,8 +56,8 @@ class AppLayout(Row):
                         on_click=self.app.add_board,
                         style=ButtonStyle(
                             bgcolor={
-                                "": colors.BLUE_200,
-                                "hovered": colors.BLUE_400
+                                "": Palette.DARK_PRIMARY_COLOR,
+                                "hovered": Palette.LIGHT_PRIMARY_COLOR,
                             }
 
                         )

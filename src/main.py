@@ -1,7 +1,5 @@
 import flet
 
-from board import Board
-
 from flet import (
     UserControl,
     View,
@@ -25,10 +23,12 @@ from flet import (
     TemplateRoute,
     TextAlign
 )
-from user import User
+from app_layout import AppLayout
+from board import Board
 from data_store import DataStore
 from memory_store import InMemoryStore
-from app_layout import AppLayout
+from palette import Palette
+from user import User
 
 
 class InfoApp(UserControl):
@@ -41,11 +41,13 @@ class InfoApp(UserControl):
         self.boards = self.store.get_boards()
         self.login_profile_button = PopupMenuItem(
             text="Log in", on_click=self.login)
+
         self.appbar_items = [
             self.login_profile_button,
             PopupMenuItem(),  # divider
             PopupMenuItem(text="Settings")
         ]
+
         self.appbar = AppBar(
             leading=Icon(icons.GRID_GOLDENRATIO_ROUNDED),
             leading_width=100,
@@ -53,7 +55,7 @@ class InfoApp(UserControl):
                        size=32, text_align=TextAlign.START),
             center_title=False,
             toolbar_height=75,
-            bgcolor=colors.LIGHT_GREEN_ACCENT_700,
+            bgcolor=Palette.PRIMARY_COLOR,
             actions=[
                 Container(
                     content=PopupMenuButton(
@@ -80,7 +82,7 @@ class InfoApp(UserControl):
                     self.layout
                 ],
                 padding=padding.all(0),
-                bgcolor=colors.GREEN_200
+                bgcolor=Palette.LIGHT_PRIMARY_COLOR
             )
         )
         self.page.update()
@@ -157,9 +159,10 @@ class InfoApp(UserControl):
             self.page.update()
 
         dialog_text = TextField(label="New Board Name",
+                                color=Palette.TEXT_ICON,
                                 on_submit=close_dlg, on_change=textfield_change)
         create_button = ElevatedButton(
-            text="Create", bgcolor=colors.GREEN_200, on_click=close_dlg, disabled=True)
+            text="Create", bgcolor=Palette.ACCENT_COLOR, on_click=close_dlg, disabled=True)
         dialog = AlertDialog(
             title=Text("Name your new board"),
             content=Column([
@@ -197,7 +200,7 @@ if __name__ == "__main__":
         page.fonts = {
             "Pacifico": "/Pacifico-Regular.ttf"
         }
-        page.bgcolor = colors.GREEN_200
+        page.bgcolor = Palette.PRIMARY_COLOR
         app = InfoApp(page, InMemoryStore())
         page.add(app)
         page.update()
