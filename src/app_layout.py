@@ -42,22 +42,22 @@ class AppLayout(Row):
             icon=icons.ARROW_CIRCLE_LEFT, icon_color=Palette.ACCENT_COLOR, selected=False,
             selected_icon=icons.ARROW_CIRCLE_RIGHT, on_click=self.toggle_nav_rail)
         self.sidebar = Sidebar(self, self.store, page)
-        self.members_view = Text("members view")
+        self.members_view = Text('members view')
         self.all_boards_view = Column([
             Row([
                 Container(
-                    Text(value="Your Boards", style="headlineMedium"),
+                    Text(value='Your Boards', style='headlineMedium'),
                     expand=True,
                     padding=padding.only(top=15)),
                 Container(
                     TextButton(
-                        "Add new board",
+                        'Add new board',
                         icon=icons.ADD,
                         on_click=self.app.add_board,
                         style=ButtonStyle(
                             bgcolor={
-                                "": Palette.DARK_PRIMARY_COLOR,
-                                "hovered": Palette.LIGHT_PRIMARY_COLOR,
+                                '': Palette.DARK_PRIMARY_COLOR,
+                                'hovered': Palette.LIGHT_PRIMARY_COLOR,
                             }
 
                         )
@@ -66,12 +66,12 @@ class AppLayout(Row):
                     padding=padding.only(right=50, top=15))
             ]),
             Row([
-                TextField(hint_text="Search all boards", autofocus=False, content_padding=padding.only(left=10),
+                TextField(hint_text='Search all boards', autofocus=False, content_padding=padding.only(left=10),
                           width=200, height=40, text_size=12,
-                          border_color=colors.BLACK26, focused_border_color=colors.BLUE_ACCENT,
+                          border_color=Palette.TEXT_ICON, focused_border_color=Palette.ACCENT_COLOR,
                           suffix_icon=icons.SEARCH)
             ]),
-            Row([Text("No Boards to Display")])
+            Row([Text('No Boards to Display')])
         ], expand=True)
         self._active_view: Control = self.all_boards_view
 
@@ -128,19 +128,19 @@ class AppLayout(Row):
                         content=PopupMenuButton(
                             items=[
                                 PopupMenuItem(
-                                    content=Text(value="Delete", style="labelMedium",
-                                                 text_align="center"),
+                                    content=Text(value='Delete', style='labelMedium',
+                                                 text_align='center'),
                                     on_click=self.app.delete_board, data=b),
                                 PopupMenuItem(),
                                 PopupMenuItem(
-                                    content=Text(value="Archive", style="labelMedium",
-                                                 text_align="center"),
+                                    content=Text(value='Archive', style='labelMedium',
+                                                 text_align='center'),
                                 )
                             ]
                         ),
                         padding=padding.only(right=-10),
                         border_radius=border_radius.all(3)
-                    )], alignment="spaceBetween"),
+                    )], alignment='spaceBetween'),
                 border=border.all(1, colors.BLACK38),
                 border_radius=border_radius.all(5),
                 bgcolor=colors.WHITE60,
