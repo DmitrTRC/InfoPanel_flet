@@ -55,7 +55,7 @@ class InfoApp(UserControl):
                        size=32, text_align=TextAlign.START),
             center_title=False,
             toolbar_height=75,
-            bgcolor=Palette.PRIMARY_COLOR,
+            bgcolor=Palette.TEXT_ICON,
             actions=[
                 Container(
                     content=PopupMenuButton(
@@ -192,7 +192,7 @@ class InfoApp(UserControl):
 
 if __name__ == "__main__":
     def main(page: Page):
-        page.title = "Flet Trello clone"
+        page.title = "InfoGraph Task Manager"
         page.padding = 0
         page.theme = theme.Theme(
             font_family="Verdana")
@@ -200,7 +200,7 @@ if __name__ == "__main__":
         page.fonts = {
             "Pacifico": "/Pacifico-Regular.ttf"
         }
-        page.bgcolor = Palette.PRIMARY_COLOR
+        page.bgcolor = Palette.DIVIDER_COLOR
         app = InfoApp(page, InMemoryStore())
         page.add(app)
         page.update()
