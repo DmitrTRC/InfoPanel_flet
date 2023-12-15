@@ -26,6 +26,7 @@ class Sidebar(UserControl):
         self.store: DataStore = store
         self.app_layout = app_layout
         self.nav_rail_visible = True
+
         self.top_nav_items = [
             NavigationRailDestination(
                 label_content=Text("Boards"),
@@ -40,6 +41,13 @@ class Sidebar(UserControl):
                 selected_icon=icons.PERSON
             ),
 
+            NavigationRailDestination(
+                label_content=Text('Weather'),
+                label='Weather',
+                icon=icons.WB_SUNNY,
+                selected_icon=icons.WB_SUNNY
+            ),
+
         ]
         self.top_nav_rail = NavigationRail(
             selected_index=None,
@@ -48,7 +56,7 @@ class Sidebar(UserControl):
             destinations=self.top_nav_items,
             bgcolor=colors.BLUE_GREY,
             extended=True,
-            height=110
+            height=140
         )
         self.bottom_nav_rail = NavigationRail(
             selected_index=None,
