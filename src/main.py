@@ -22,7 +22,7 @@ from flet import (
     margin,
     TemplateRoute,
     TextAlign
-)
+    )
 from app_layout import AppLayout
 from board import Board
 from data_store import DataStore
@@ -32,6 +32,7 @@ from user import User
 
 
 class InfoApp(UserControl):
+
     def __init__(self, page: Page, store: DataStore):
         super().__init__()
         self.layout = None
@@ -40,37 +41,50 @@ class InfoApp(UserControl):
         self.page.on_route_change = self.route_change
         self.boards = self.store.get_boards()
         self.login_profile_button = PopupMenuItem(
-            text="Log in", on_click=self.login)
+            text="Log in",
+            # content=Text(
+            #     'Log in',
+            #     color=Palette.TEXT_ICON,
+            #     bgcolor=Palette.DARK_PRIMARY_COLOR,
+            #     ),
+
+            on_click=self.login
+
+            )
 
         self.appbar_items = [
             self.login_profile_button,
             PopupMenuItem(),  # divider
             PopupMenuItem(text="Settings")
-        ]
+            ]
 
         self.appbar = AppBar(
             leading=Icon(icons.GRID_GOLDENRATIO_ROUNDED),
             leading_width=100,
-            title=Text('Info Graph', font_family="Pacifico",
-                       size=32, text_align=TextAlign.START),
+            title=Text(
+                'Info Graph', font_family="Pacifico",
+                size=32, text_align=TextAlign.START
+                ),
             center_title=False,
             toolbar_height=75,
-            bgcolor=Palette.TEXT_ICON,
+            bgcolor=Palette.DARK_PRIMARY_COLOR,
             actions=[
                 Container(
                     content=PopupMenuButton(
-                        items=self.appbar_items
-                    ),
-                    margin=margin.only(left=50, right=25)
-                )
-            ],
-        )
+                        items=self.appbar_items,
+                        ),
+                    margin=margin.only(left=50, right=25),
+                    )
+                ],
+            )
         self.page.appbar = self.appbar
         self.page.update()
 
     def build(self):
-        self.layout = AppLayout(self, self.page, self.store,
-                                tight=True, expand=True, vertical_alignment=TextAlign.START)
+        self.layout = AppLayout(
+            self, self.page, self.store,
+            tight=True, expand=True, vertical_alignment=TextAlign.START
+            )
         return self.layout
 
     def initialize(self):
@@ -80,12 +94,14 @@ class InfoApp(UserControl):
                 [
                     self.appbar,
                     self.layout
-                ],
+                    ],
                 padding=padding.all(0),
-                bgcolor=Palette.LIGHT_PRIMARY_COLOR
+                bgcolor=Palette.PRIMARY_COLOR
+                )
             )
-        )
+
         self.page.update()
+
         # create an initial board for demonstration if no boards
         if len(self.boards) == 0:
             self.create_new_board("Task Board")
@@ -108,20 +124,23 @@ class InfoApp(UserControl):
 
             dialog.open = False
             self.appbar_items[0] = PopupMenuItem(
-                text=f"{self.page.client_storage.get('current_user')}'s Profile")
+                text=f"{self.page.client_storage.get('current_user')}'s Profile"
+                )
             self.page.update()
 
         user_name = TextField(label="User name")
         password = TextField(label="Password", password=True)
         dialog = AlertDialog(
             title=Text("Please enter your login credentials"),
-            content=Column([
-                user_name,
-                password,
-                ElevatedButton(text="Login", on_click=close_dlg),
-            ], tight=True),
+            content=Column(
+                [
+                    user_name,
+                    password,
+                    ElevatedButton(text="Login", on_click=close_dlg),
+                    ], tight=True
+                ),
             on_dismiss=lambda e: print("Modal dialog dismissed!"),
-        )
+            )
         self.page.dialog = dialog
         dialog.open = True
         self.page.update()
@@ -158,23 +177,35 @@ class InfoApp(UserControl):
                 create_button.disabled = False
             self.page.update()
 
-        dialog_text = TextField(label="New Board Name",
-                                color=Palette.TEXT_ICON,
-                                on_submit=close_dlg, on_change=textfield_change)
+        dialog_text = TextField(
+            label="New Board Name",
+            color=Palette.TEXT_ICON,
+            on_submit=close_dlg,
+            on_change=textfield_change
+            )
+
         create_button = ElevatedButton(
-            text="Create", bgcolor=Palette.ACCENT_COLOR, on_click=close_dlg, disabled=True)
+            text="Create", bgcolor=Palette.DARK_PRIMARY_COLOR, on_click=close_dlg, disabled=True
+            )
+
         dialog = AlertDialog(
             title=Text("Name your new board"),
-            content=Column([
-                dialog_text,
-                Row([
-                    ElevatedButton(
-                        text="Cancel", on_click=close_dlg),
-                    create_button
-                ], alignment="spaceBetween")
-            ], tight=True),
+            content=Column(
+                [
+                    dialog_text,
+                    Row(
+                        [
+                            ElevatedButton(
+                                text="Cancel", on_click=close_dlg
+                                ),
+                            create_button
+                            ], alignment="spaceBetween"
+                        )
+                    ], tight=True
+                ),
             on_dismiss=lambda e: print("Modal dialog dismissed!"),
-        )
+
+            )
         self.page.dialog = dialog
         dialog.open = True
         self.page.update()
@@ -195,12 +226,13 @@ if __name__ == "__main__":
         page.title = "InfoGraph Task Manager"
         page.padding = 0
         page.theme = theme.Theme(
-            font_family="Verdana")
+            font_family="Verdana"
+            )
         page.theme.page_transitions.windows = "cupertino"
         page.fonts = {
             "Pacifico": "/Pacifico-Regular.ttf"
-        }
-        page.bgcolor = Palette.DIVIDER_COLOR
+            }
+        page.bgcolor = Palette.TEXT_ICON
         app = InfoApp(page, InMemoryStore())
         page.add(app)
         page.update()
