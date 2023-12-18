@@ -1,33 +1,12 @@
 import flet
 
-from flet import (
-    UserControl,
-    View,
-    AlertDialog,
-    Column,
-    Row,
-    Container,
-    Icon,
-    Page,
-    Text,
-    ElevatedButton,
-    AppBar,
-    PopupMenuButton,
-    PopupMenuItem,
-    TextField,
-    colors,
-    icons,
-    padding,
-    theme,
-    margin,
-    TemplateRoute,
-    TextAlign
-    )
+from flet import *
+
 from app_layout import AppLayout
 from board import Board
 from data_store import DataStore
 from memory_store import InMemoryStore
-from palette import Palette
+from palette import PaletteDark as Palette
 from user import User
 
 
@@ -42,11 +21,6 @@ class InfoApp(UserControl):
         self.boards = self.store.get_boards()
         self.login_profile_button = PopupMenuItem(
             text="Log in",
-            # content=Text(
-            #     'Log in',
-            #     color=Palette.TEXT_ICON,
-            #     bgcolor=Palette.DARK_PRIMARY_COLOR,
-            #     ),
 
             on_click=self.login
 
@@ -67,7 +41,7 @@ class InfoApp(UserControl):
                 ),
             center_title=False,
             toolbar_height=75,
-            bgcolor=Palette.DARK_PRIMARY_COLOR,
+            bgcolor=Palette.SECONDARY_VARIANT,
             actions=[
                 Container(
                     content=PopupMenuButton(
@@ -96,7 +70,7 @@ class InfoApp(UserControl):
                     self.layout
                     ],
                 padding=padding.all(0),
-                bgcolor=Palette.PRIMARY_COLOR
+                bgcolor=Palette.PRIMARY
                 )
             )
 
@@ -179,13 +153,13 @@ class InfoApp(UserControl):
 
         dialog_text = TextField(
             label="New Board Name",
-            color=Palette.TEXT_ICON,
+            color=Palette.ON_PRIMARY,
             on_submit=close_dlg,
             on_change=textfield_change
             )
 
         create_button = ElevatedButton(
-            text="Create", bgcolor=Palette.DARK_PRIMARY_COLOR, on_click=close_dlg, disabled=True
+            text="Create", bgcolor=Palette.SECONDARY, on_click=close_dlg, disabled=True
             )
 
         dialog = AlertDialog(
@@ -232,7 +206,7 @@ if __name__ == "__main__":
         page.fonts = {
             "Pacifico": "/Pacifico-Regular.ttf"
             }
-        page.bgcolor = Palette.TEXT_ICON
+        page.bgcolor = Palette.ON_BACKGROUND
         app = InfoApp(page, InMemoryStore())
         page.add(app)
         page.update()

@@ -15,9 +15,9 @@ from flet import (
     icons,
     padding,
     margin,
-)
+    )
 from data_store import DataStore
-from palette import Palette
+from palette import PaletteDark as Palette
 
 
 class Sidebar(UserControl):
@@ -35,73 +35,77 @@ class Sidebar(UserControl):
                 label="Boards",
                 icon=icons.BOOK_OUTLINED,
                 selected_icon=icons.BOOK_OUTLINED
-            ),
+                ),
             NavigationRailDestination(
                 label_content=Text("Members"),
                 label="Members",
                 icon=icons.PERSON,
                 selected_icon=icons.PERSON
-            ),
+                ),
 
             NavigationRailDestination(
                 label_content=Text('Weather'),
                 label='Weather',
                 icon=icons.WB_SUNNY,
                 selected_icon=icons.WB_SUNNY
-            ),
+                ),
 
-        ]
+            ]
         self.top_nav_rail = NavigationRail(
             selected_index=None,
             label_type="all",
             on_change=self.top_nav_change,
             destinations=self.top_nav_items,
-            bgcolor=Palette.SECONDARY_TEXT,
+            bgcolor=Palette.PRIMARY_VARIANT,
             extended=True,
             height=140
-        )
+            )
         self.bottom_nav_rail = NavigationRail(
             selected_index=None,
             label_type="all",
             on_change=self.bottom_nav_change,
             extended=True,
             expand=True,
-            bgcolor=Palette.SECONDARY_TEXT,
-        )
+            bgcolor=Palette.PRIMARY_VARIANT,
+            )
         self.toggle_nav_rail_button = IconButton(icons.ARROW_BACK)
 
     def build(self):
         self.view = Container(
-            content=Column([
-                Row([
-                    Text("Workspace"),
-                ], alignment="spaceBetween"),
-                # divider
-                Container(
-                    bgcolor=Palette.ACCENT_COLOR,
-                    border_radius=border_radius.all(30),
-                    height=1,
-                    alignment=alignment.center_right,
-                    width=220
+            content=Column(
+                [
+                    Row(
+                        [
+                            Text("Workspace"),
+                            ], alignment="spaceBetween"
+                        ),
+                    # divider
+                    Container(
+                        bgcolor=Palette.PRIMARY_VARIANT,
+                        border_radius=border_radius.all(30),
+                        height=1,
+                        alignment=alignment.center_right,
+                        width=220
+                        ),
+                    self.top_nav_rail,
+                    # divider
+                    Container(
+                        bgcolor=Palette.PRIMARY_VARIANT,
+                        border_radius=border_radius.all(30),
+                        height=1,
+                        alignment=alignment.center_right,
+                        width=220
+                        ),
+                    self.bottom_nav_rail
+                    ], tight=True
                 ),
-                self.top_nav_rail,
-                # divider
-                Container(
-                    bgcolor=Palette.ACCENT_COLOR,
-                    border_radius=border_radius.all(30),
-                    height=1,
-                    alignment=alignment.center_right,
-                    width=220
-                ),
-                self.bottom_nav_rail
-            ], tight=True),
             padding=padding.all(15),
             margin=margin.all(0),
             width=250,
             expand=True,
-            bgcolor=Palette.DARK_PRIMARY_COLOR,
+            bgcolor=Palette.PRIMARY,
             visible=self.nav_rail_visible,
-        )
+            )
         return self.view
 
     def sync_board_destinations(self):
@@ -123,12 +127,12 @@ class Sidebar(UserControl):
                         width=150,
                         text_align="start",
                         data=i
-                    ),
+                        ),
                     label=b.name,
                     selected_icon=icons.CHEVRON_RIGHT_ROUNDED,
                     icon=icons.CHEVRON_RIGHT_OUTLINED
+                    )
                 )
-            )
         self.view.update()
 
     def toggle_nav_rail(self, e):
@@ -142,8 +146,11 @@ class Sidebar(UserControl):
         e.control.update()
 
     def board_name_blur(self, e):
-        self.store.update_board(self.store.get_boards()[e.control.data], {
-            'name': e.control.value})
+        self.store.update_board(
+            self.store.get_boards()[e.control.data], {
+                'name': e.control.value
+                }
+            )
         self.app_layout.hydrate_all_boards_view()
         e.control.read_only = True
         e.control.border = "none"

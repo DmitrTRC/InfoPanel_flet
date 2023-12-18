@@ -2,12 +2,16 @@ from dataclasses import dataclass
 
 
 @dataclass
-class Palette:
-    DARK_PRIMARY_COLOR: str = '#00796B'
-    LIGHT_PRIMARY_COLOR: str = "#B2DFDB"
-    PRIMARY_COLOR: str = "#009688"
-    TEXT_ICON: str = "#FFFFFF"
-    ACCENT_COLOR: str = "#7C4DFF"
-    PRIMARY_TEXT: str = "#212121"
-    SECONDARY_TEXT: str = "#757575"
-    DIVIDER_COLOR: str = "#BDBDBD"
+class PaletteDark:
+    PRIMARY = "#6200EE"
+    PRIMARY_VARIANT = "#3700B3"
+    SECONDARY = "#03DAC5"
+    SECONDARY_VARIANT = "#018786"
+    BACKGROUND = "#121212"
+    SURFACE = "#121212"
+    ERROR = "#CF6679"
+    ON_PRIMARY = "#000000"
+    ON_SECONDARY = "#000000"
+    ON_BACKGROUND = "#FFFFFF"
+    ON_SURFACE = "#FFFFFF"
+    ON_ERROR = "#000000"
