@@ -45,46 +45,7 @@ class AppLayout(Row):
             )
         self.sidebar = Sidebar(self, self.store, page)
         self.members_view = Text('members view')
-        self.all_boards_view = Column(
-            [
-                Row(
-                    [
-                        Container(
-                            Text(value='Your Boards', style='headlineMedium'),
-                            expand=True,
-                            padding=padding.only(top=15)
-                            ),
-                        Container(
-                            TextButton(
-                                'Add new board',
-                                icon=icons.ADD,
-                                on_click=self.app.add_board,
-                                style=ButtonStyle(
-                                    bgcolor={
-                                        '': Palette.SECONDARY,
-                                        'hovered': Palette.PRIMARY,
-                                        }
-
-                                    )
-                                ),
-
-                            padding=padding.only(right=50, top=15)
-                            )
-                        ]
-                    ),
-                Row(
-                    [
-                        TextField(
-                            hint_text='Search all boards', autofocus=False, content_padding=padding.only(left=10),
-                            width=200, height=40, text_size=12,
-                            border_color=Palette.ON_PRIMARY, focused_border_color=Palette.PRIMARY_VARIANT,
-                            suffix_icon=icons.SEARCH
-                            )
-                        ]
-                    ),
-                Row([Text('No Boards to Display')])
-                ], expand=True
-            )
+        self.all_boards_view = self.get_board_layout()
         self._active_view: Control = self.all_boards_view
 
         self.controls = [self.sidebar,
@@ -133,7 +94,7 @@ class AppLayout(Row):
         self.page.update()
 
     def hydrate_all_boards_view(self):
-        self.all_boards_view.controls[-1] = Row(
+        self.all_boards_view.controls[-1] = Row(  # Set the last control in the column to the new row
             [
                 Container(
                     content=Row(
@@ -185,3 +146,45 @@ class AppLayout(Row):
         self.toggle_nav_rail_button.selected = not self.toggle_nav_rail_button.selected
         self.page_resize()
         self.page.update()
+
+    def get_board_layout(self) -> Control:
+        return Column(
+            [
+                Row(
+                    [
+                        Container(
+                            Text(value='Your Boards', style='headlineMedium'),
+                            expand=True,
+                            padding=padding.only(top=15)
+                            ),
+                        Container(
+                            TextButton(
+                                'Add new board',
+                                icon=icons.ADD,
+                                on_click=self.app.add_board,
+                                style=ButtonStyle(
+                                    bgcolor={
+                                        '': Palette.SECONDARY,
+                                        'hovered': Palette.PRIMARY,
+                                        }
+
+                                    )
+                                ),
+
+                            padding=padding.only(right=50, top=15)
+                            )
+                        ]
+                    ),
+                Row(
+                    [
+                        TextField(
+                            hint_text='Search all boards', autofocus=False, content_padding=padding.only(left=10),
+                            width=200, height=40, text_size=12,
+                            border_color=Palette.ON_PRIMARY, focused_border_color=Palette.PRIMARY_VARIANT,
+                            suffix_icon=icons.SEARCH
+                            )
+                        ]
+                    ),
+                Row([Text('No Boards to Display')])
+                ], expand=True
+            )
