@@ -45,7 +45,7 @@ class AppLayout(Row):
             )
         self.sidebar = Sidebar(self, self.store, page)
         self.members_view = Text('members view')
-        self.weather_view = Text('weather view')
+        self.weather_view = self.get_weather_layout()
         self.all_boards_view = self.get_board_layout()
         self._active_view: Control = self.all_boards_view
 
@@ -194,5 +194,47 @@ class AppLayout(Row):
                         ]
                     ),
                 Row([Text('No Boards to Display')])
+                ], expand=True
+            )
+
+    def get_weather_layout(self) -> Control:
+        return Column(
+            [
+                Row(
+                    [
+                        Container(
+                            Text(value='Weather', style='headlineMedium'),
+                            expand=True,
+                            padding=padding.only(top=15)
+                            ),
+                        Container(
+                            TextButton(
+                                'Add new location',
+                                icon=icons.ADD,
+                                on_click=self.app.add_board,
+                                style=ButtonStyle(
+                                    bgcolor={
+                                        '': Palette.SECONDARY,
+                                        'hovered': Palette.PRIMARY,
+                                        }
+
+                                    )
+                                ),
+
+                            padding=padding.only(right=50, top=15)
+                            )
+                        ]
+                    ),
+                Row(
+                    [
+                        TextField(
+                            hint_text='Search all locations', autofocus=False, content_padding=padding.only(left=10),
+                            width=200, height=40, text_size=12,
+                            border_color=Palette.ON_PRIMARY, focused_border_color=Palette.PRIMARY_VARIANT,
+                            suffix_icon=icons.SEARCH
+                            )
+                        ]
+                    ),
+                Row([Text('No Locations to Display')])
                 ], expand=True
             )
