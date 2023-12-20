@@ -140,7 +140,8 @@ class Sidebar(UserControl):
         self.view.update()
         self.page.update()
 
-    def board_name_focus(self, e):
+    @staticmethod
+    def board_name_focus(e):
         e.control.read_only = False
         e.control.border = "outline"
         e.control.update()
@@ -157,18 +158,23 @@ class Sidebar(UserControl):
         self.page.update()
 
     def top_nav_change(self, e):
-        index = e if (type(e) == int) else e.control.selected_index
+        index = e if (type(e) is int) else e.control.selected_index
         self.bottom_nav_rail.selected_index = None
         self.top_nav_rail.selected_index = index
         self.view.update()
+
         if index == 0:
             self.page.route = "/boards"
         elif index == 1:
             self.page.route = "/members"
+        elif index == 2:
+            self.page.route = "/weather"
+            print("Weather page opened")
+
         self.page.update()
 
     def bottom_nav_change(self, e):
-        index = e if (type(e) == int) else e.control.selected_index
+        index = e if (type(e) is int) else e.control.selected_index
         self.top_nav_rail.selected_index = None
         self.bottom_nav_rail.selected_index = index
         self.page.route = f"/board/{index}"

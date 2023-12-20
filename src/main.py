@@ -133,6 +133,9 @@ class InfoApp(UserControl):
             self.layout.set_all_boards_view()
         elif t_route.match("/members"):
             self.layout.set_members_view()
+        elif t_route.match("/weather"):
+            self.layout.set_weather_view()
+
         self.page.update()
 
     def add_board(self, e):
