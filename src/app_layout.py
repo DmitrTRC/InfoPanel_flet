@@ -45,6 +45,7 @@ class AppLayout(Row):
             )
         self.sidebar = Sidebar(self, self.store, page)
         self.members_view = Text('members view')
+        self.weather_view = Text('weather view')
         self.all_boards_view = self.get_board_layout()
         self._active_view: Control = self.all_boards_view
 
@@ -81,6 +82,13 @@ class AppLayout(Row):
     def set_members_view(self):
         self.active_view = self.members_view
         self.sidebar.top_nav_rail.selected_index = 1
+        self.sidebar.bottom_nav_rail.selected_index = None
+        self.sidebar.update()
+        self.page.update()
+
+    def set_weather_view(self):
+        self.active_view = self.weather_view
+        self.sidebar.top_nav_rail.selected_index = 2
         self.sidebar.bottom_nav_rail.selected_index = None
         self.sidebar.update()
         self.page.update()
