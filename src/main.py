@@ -21,9 +21,7 @@ class InfoApp(UserControl):
         self.boards = self.store.get_boards()
         self.login_profile_button = PopupMenuItem(
             text="Log in",
-
             on_click=self.login
-
             )
 
         self.appbar_items = [
@@ -51,6 +49,7 @@ class InfoApp(UserControl):
                     )
                 ],
             )
+
         self.page.appbar = self.appbar
         self.page.update()
 
@@ -210,10 +209,10 @@ if __name__ == "__main__":
             "Pacifico": "/Pacifico-Regular.ttf"
             }
         page.bgcolor = Palette.ON_BACKGROUND
-        app = InfoApp(page, InMemoryStore())
-        page.add(app)
+        info_app = InfoApp(page, InMemoryStore())
+        page.add(info_app)
         page.update()
-        app.initialize()
+        info_app.initialize()
 
 
     flet.app(target=main, assets_dir="../assets")

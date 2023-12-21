@@ -7,3 +7,4 @@ from flet import (
 
 
 class WeatherPage(Control):
+    pass
