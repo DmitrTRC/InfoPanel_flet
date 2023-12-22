@@ -19,7 +19,6 @@ class WeatherService:
         response = requests.get(url, params=params)
         return response.json()
 
-
-if __name__ == '__main__':
-    service = WeatherService()
-    pprint(service.get_weather('Moscow'))
+# if __name__ == '__main__':
+#     service = WeatherService()
+#     pprint(service.get_weather('Moscow'))

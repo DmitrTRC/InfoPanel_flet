@@ -88,6 +88,7 @@ class AppLayout(Row):
 
     def set_weather_view(self):
         self.active_view = self.weather_view
+        self.update_weather_view()
         self.sidebar.top_nav_rail.selected_index = 2
         self.sidebar.bottom_nav_rail.selected_index = None
         self.sidebar.update()
@@ -102,7 +103,7 @@ class AppLayout(Row):
         self.page.update()
 
     def hydrate_all_boards_view(self):
-        self.all_boards_view.controls[-1] = Row(  # Set the last control in the column to the new row
+        self.all_boards_view.controls[-1] = Row(  # Set the last control in the column to the new row. Bad practice
             [
                 Container(
                     content=Row(
@@ -237,4 +238,21 @@ class AppLayout(Row):
                     ),
                 Row([Text('No Locations to Display')])
                 ], expand=True
+            )
+
+    def update_weather_view(self):
+        from OpenWeatherService import WeatherService
+
+        weather_service = WeatherService()
+        weather_service.get_weather('Moscow')
+
+        self.weather_view.controls[-1] = Row(
+            [
+                Container(
+                    content=Text(value=weather_service.weather_data['name'], style='headlineMedium'),
+                    expand=True,
+                    padding=padding.only(top=15)
+                    ),
+
+                ]
             )
