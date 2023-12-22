@@ -22,6 +22,7 @@ from board import Board
 from data_store import DataStore
 from palette import PaletteDark as Palette
 from sidebar import Sidebar
+from WeatherWidget import WeatherWidget
 
 
 class AppLayout(Row):
@@ -45,7 +46,7 @@ class AppLayout(Row):
             )
         self.sidebar = Sidebar(self, self.store, page)
         self.members_view = Text('members view')
-        self.weather_view = self.get_weather_layout()
+        self.weather_view = WeatherWidget()
         self.all_boards_view = self.get_board_layout()
         self._active_view: Control = self.all_boards_view
 
@@ -88,7 +89,8 @@ class AppLayout(Row):
 
     def set_weather_view(self):
         self.active_view = self.weather_view
-        self.update_weather_view()
+        self.weather_view.update_weather_info()
+
         self.sidebar.top_nav_rail.selected_index = 2
         self.sidebar.bottom_nav_rail.selected_index = None
         self.sidebar.update()
@@ -196,63 +198,4 @@ class AppLayout(Row):
                     ),
                 Row([Text('No Boards to Display')])
                 ], expand=True
-            )
-
-    def get_weather_layout(self) -> Control:
-        return Column(
-            [
-                Row(
-                    [
-                        Container(
-                            Text(value='Weather', style='headlineMedium'),
-                            expand=True,
-                            padding=padding.only(top=15)
-                            ),
-                        Container(
-                            TextButton(
-                                'Add new location',
-                                icon=icons.ADD,
-                                on_click=self.app.add_board,
-                                style=ButtonStyle(
-                                    bgcolor={
-                                        '': Palette.SECONDARY,
-                                        'hovered': Palette.PRIMARY,
-                                        }
-
-                                    )
-                                ),
-
-                            padding=padding.only(right=50, top=15)
-                            )
-                        ]
-                    ),
-                Row(
-                    [
-                        TextField(
-                            hint_text='Search all locations', autofocus=False, content_padding=padding.only(left=10),
-                            width=200, height=40, text_size=12,
-                            border_color=Palette.ON_PRIMARY, focused_border_color=Palette.PRIMARY_VARIANT,
-                            suffix_icon=icons.SEARCH
-                            )
-                        ]
-                    ),
-                Row([Text('No Locations to Display')])
-                ], expand=True
-            )
-
-    def update_weather_view(self):
-        from OpenWeatherService import WeatherService
-
-        weather_service = WeatherService()
-        weather_service.get_weather('Moscow')
-
-        self.weather_view.controls[-1] = Row(
-            [
-                Container(
-                    content=Text(value=weather_service.weather_data['name'], style='headlineMedium'),
-                    expand=True,
-                    padding=padding.only(top=15)
-                    ),
-
-                ]
             )

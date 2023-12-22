@@ -1,6 +1,29 @@
 import flet
 
-from flet import *
+from flet import (
+
+    Column,
+    Container,
+    Page,
+    Row,
+    Text,
+    UserControl,
+    View,
+    TemplateRoute,
+    AppBar,
+    PopupMenuItem,
+    PopupMenuButton,
+    AlertDialog,
+    ElevatedButton,
+    TextField,
+    Icon,
+    icons,
+    TextAlign,
+    theme,
+    padding,
+    margin,
+
+    )
 
 from app_layout import AppLayout
 from board import Board

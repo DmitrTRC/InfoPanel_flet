@@ -1,5 +1,6 @@
 import requests
-from pprint import pprint
+
+from icecream import ic
 
 
 class WeatherService:
@@ -19,6 +20,7 @@ class WeatherService:
         response = requests.get(url, params=params)
         return response.json()
 
-# if __name__ == '__main__':
-#     service = WeatherService()
-#     pprint(service.get_weather('Moscow'))
+
+if __name__ == '__main__':
+    service = WeatherService()
+    ic(service.get_weather('Moscow'))
