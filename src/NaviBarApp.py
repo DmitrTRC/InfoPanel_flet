@@ -4,6 +4,7 @@ from flet import UserControl
 
 
 class NaviBarApp(UserControl):
+
     def __init__(self, page):
         super().__init__()
         self.rail = None
@@ -31,9 +32,9 @@ class NaviBarApp(UserControl):
             [
                 self.rail,
                 ft.VerticalDivider(width=200),
-            ],
+                ],
             expand=True
-        )
+            )
 
         return self.view
 
@@ -51,24 +52,24 @@ class NaviBarApp(UserControl):
                     icon_content=ft.Icon(ft.icons.ACCOUNT_BOX_SHARP),
                     selected_icon_content=ft.Icon(ft.icons.ACCOUNT_BOX_SHARP),
                     label="Info Panel",
-                ),
+                    ),
                 ft.NavigationRailDestination(
                     icon_content=ft.Icon(ft.icons.SUPERVISED_USER_CIRCLE),
                     selected_icon_content=ft.Icon(ft.icons.SUPERVISED_USER_CIRCLE),
                     label="Change User",
-                ),
+                    ),
                 ft.NavigationRailDestination(
                     icon_content=ft.Icon(ft.icons.ANALYTICS),
                     selected_icon_content=ft.Icon(ft.icons.ANALYTICS),
                     label="Task Manager",
-                ),
+                    ),
 
                 ft.NavigationRailDestination(
                     icon_content=ft.Icon(ft.icons.AIR),
                     selected_icon_content=ft.Icon(ft.icons.BOOKMARK),
                     label="Weather Forecast",
-                ),
-            ],
+                    ),
+                ],
             on_change=self.menu_choice_manager
             # TODO: HW4 Replace lambda expression to method menu_choice_manager()
-        )
+            )
