@@ -7,17 +7,19 @@ from flet import (
 
 from OpenWeatherService import WeatherService
 
+from pprint import pprint
+
 
 class WeatherWidget(UserControl):
 
     def __init__(self):
         super().__init__()
+
         self.view = None
         self.city = None
         self.weather_info = None
         self.weather_provider = WeatherService()
         self.get_weather_btn = None
-        self.city_input = None
 
     def build(self):
         # UI components
@@ -45,11 +47,14 @@ class WeatherWidget(UserControl):
     def update_weather_info(self):
         # Fetch weather data and update UI
         self.city = self.city_input.value
-        weather_data = self.weather_provider.get_weather(self.city)
+        weather_data = self.weather_provider.get_weather('Moscow')
+
+        pprint(weather_data)
 
         if weather_data:
             temperature = weather_data["main"]["temp"]
             condition = weather_data["weather"][0]["description"]
             self.weather_info.value = f"Weather in {self.city}: {condition}, Temperature: {temperature}°C"
+
         else:
             self.weather_info.value = "Weather data not available."

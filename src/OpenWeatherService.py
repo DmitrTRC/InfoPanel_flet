@@ -23,4 +23,5 @@ class WeatherService:
 
 if __name__ == '__main__':
     service = WeatherService()
-    ic(service.get_weather('Moscow'))
+
+    print(service.get_weather('Moscow'))
