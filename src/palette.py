@@ -1,4 +1,7 @@
+import flet
+
 from dataclasses import dataclass
+from flet import (colors, Control, Page)
 
 
 @dataclass
@@ -15,3 +18,6 @@ class PaletteDark:
     ON_BACKGROUND = "#FFFFFF"
     ON_SURFACE = "#FFFFFF"
     ON_ERROR = "#000000"
+
+    def run_demo(self):
+        pass
