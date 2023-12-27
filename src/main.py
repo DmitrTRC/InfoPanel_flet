@@ -148,7 +148,8 @@ class InfoApp(UserControl):
 
     def settings(self, e):
         from palette import show_theme_colors
-        show_theme_colors(self.page)
+        self.page.content = show_theme_colors()
+        self.page.update()
 
     def route_change(self, e):
         t_route = TemplateRoute(self.page.route)

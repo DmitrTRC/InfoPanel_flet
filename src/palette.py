@@ -1,7 +1,7 @@
 import flet as ft
 
 
-def show_theme_colors(page: ft.Page):
+def show_theme_colors():
     class Color:
 
         def __init__(self, display_name, name='Theme colors', is_dark=False):
@@ -71,6 +71,4 @@ def show_theme_colors(page: ft.Page):
                 )
             )
 
-    # ft.Container(border_radius=10, content=theme_colors_column)
-    page.content = theme_colors_column
-    page.update()
+    return ft.Container(border_radius=10, content=theme_colors_column)
