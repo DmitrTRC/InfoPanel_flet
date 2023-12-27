@@ -17,7 +17,9 @@ from flet import (
     margin,
     )
 from data_store import DataStore
-from palette import PaletteDark as Palette
+
+
+# from palette import PaletteDark as Palette
 
 
 class Sidebar(UserControl):
@@ -56,7 +58,7 @@ class Sidebar(UserControl):
             label_type="all",
             on_change=self.top_nav_change,
             destinations=self.top_nav_items,
-            bgcolor=Palette.PRIMARY_VARIANT,
+            # bgcolor=Palette.PRIMARY_VARIANT,
             extended=True,
             height=140
             )
@@ -66,7 +68,7 @@ class Sidebar(UserControl):
             on_change=self.bottom_nav_change,
             extended=True,
             expand=True,
-            bgcolor=Palette.PRIMARY_VARIANT,
+            # bgcolor=Palette.PRIMARY_VARIANT,
             )
         self.toggle_nav_rail_button = IconButton(icons.ARROW_BACK)
 
@@ -81,7 +83,7 @@ class Sidebar(UserControl):
                         ),
                     # divider
                     Container(
-                        bgcolor=Palette.PRIMARY_VARIANT,
+                        # bgcolor=Palette.PRIMARY_VARIANT,
                         border_radius=border_radius.all(30),
                         height=1,
                         alignment=alignment.center_right,
@@ -90,7 +92,7 @@ class Sidebar(UserControl):
                     self.top_nav_rail,
                     # divider
                     Container(
-                        bgcolor=Palette.PRIMARY_VARIANT,
+                        # bgcolor=Palette.PRIMARY_VARIANT,
                         border_radius=border_radius.all(30),
                         height=1,
                         alignment=alignment.center_right,
@@ -103,7 +105,7 @@ class Sidebar(UserControl):
             margin=margin.all(0),
             width=250,
             expand=True,
-            bgcolor=Palette.PRIMARY,
+            # bgcolor=Palette.PRIMARY,
             visible=self.nav_rail_visible,
             )
         return self.view

@@ -29,7 +29,6 @@ from app_layout import AppLayout
 from board import Board
 from data_store import DataStore
 from memory_store import InMemoryStore
-from palette import PaletteDark as Palette
 from user import User
 
 
@@ -42,15 +41,21 @@ class InfoApp(UserControl):
         self.store: DataStore = store
         self.page.on_route_change = self.route_change
         self.boards = self.store.get_boards()
+
         self.login_profile_button = PopupMenuItem(
             text="Log in",
             on_click=self.login
             )
 
+        self.settings_button = PopupMenuItem(
+            text="Settings",
+            on_click=self.settings
+            )
+
         self.appbar_items = [
             self.login_profile_button,
             PopupMenuItem(),  # divider
-            PopupMenuItem(text="Settings")
+            self.settings_button,
             ]
 
         self.appbar = AppBar(
@@ -62,7 +67,7 @@ class InfoApp(UserControl):
                 ),
             center_title=False,
             toolbar_height=75,
-            bgcolor=Palette.SECONDARY_VARIANT,
+            # bgcolor=Palette.SECONDARY_VARIANT,
             actions=[
                 Container(
                     content=PopupMenuButton(
@@ -92,7 +97,7 @@ class InfoApp(UserControl):
                     self.layout
                     ],
                 padding=padding.all(0),
-                bgcolor=Palette.PRIMARY
+                # bgcolor=Palette.PRIMARY
                 )
             )
 
@@ -141,6 +146,10 @@ class InfoApp(UserControl):
         dialog.open = True
         self.page.update()
 
+    def settings(self, e):
+        from palette import show_theme_colors
+        show_theme_colors(self.page)
+
     def route_change(self, e):
         t_route = TemplateRoute(self.page.route)
 
@@ -178,13 +187,16 @@ class InfoApp(UserControl):
 
         dialog_text = TextField(
             label="New Board Name",
-            color=Palette.ON_PRIMARY,
+            # color=Palette.ON_PRIMARY,
             on_submit=close_dlg,
             on_change=textfield_change
             )
 
         create_button = ElevatedButton(
-            text="Create", bgcolor=Palette.SECONDARY, on_click=close_dlg, disabled=True
+            text="Create",
+            # bgcolor=Palette.SECONDARY,
+            on_click=close_dlg,
+            disabled=True
             )
 
         dialog = AlertDialog(
@@ -225,13 +237,14 @@ if __name__ == "__main__":
         page.title = "InfoGraph Task Manager"
         page.padding = 0
         page.theme = theme.Theme(
+            color_scheme_seed='green',
             font_family="Verdana"
             )
         page.theme.page_transitions.windows = "cupertino"
         page.fonts = {
             "Pacifico": "/Pacifico-Regular.ttf"
             }
-        page.bgcolor = Palette.ON_BACKGROUND
+        # page.bgcolor = Palette.ON_BACKGROUND
         info_app = InfoApp(page, InMemoryStore())
         page.add(info_app)
         page.update()

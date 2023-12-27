@@ -20,7 +20,6 @@ from flet import (
     )
 from board import Board
 from data_store import DataStore
-from palette import PaletteDark as Palette
 from sidebar import Sidebar
 from WeatherWidget import WeatherWidget
 
@@ -41,7 +40,7 @@ class AppLayout(Row):
         self.page.on_resize = self.page_resize
         self.store: DataStore = store
         self.toggle_nav_rail_button = IconButton(
-            icon=icons.ARROW_CIRCLE_LEFT, icon_color=Palette.PRIMARY_VARIANT, selected=False,
+            icon=icons.ARROW_CIRCLE_LEFT, selected=False,
             selected_icon=icons.ARROW_CIRCLE_RIGHT, on_click=self.toggle_nav_rail
             )
         self.sidebar = Sidebar(self, self.store, page)
@@ -136,9 +135,12 @@ class AppLayout(Row):
                                 border_radius=border_radius.all(3)
                                 )], alignment='spaceBetween'
                         ),
-                    border=border.all(1, colors.BLACK38),
+                    border=border.all(
+                        1,
+                        # colors.BLACK38
+                        ),
                     border_radius=border_radius.all(5),
-                    bgcolor=colors.WHITE60,
+                    # bgcolor=colors.WHITE60,
                     padding=padding.all(10),
                     width=250,
                     data=b
@@ -174,10 +176,10 @@ class AppLayout(Row):
                                 icon=icons.ADD,
                                 on_click=self.app.add_board,
                                 style=ButtonStyle(
-                                    bgcolor={
-                                        '': Palette.SECONDARY,
-                                        'hovered': Palette.PRIMARY,
-                                        }
+                                    # bgcolor={
+                                    #     '': Palette.SECONDARY,
+                                    #     'hovered': Palette.PRIMARY,
+                                    #     }
 
                                     )
                                 ),
@@ -191,7 +193,7 @@ class AppLayout(Row):
                         TextField(
                             hint_text='Search all boards', autofocus=False, content_padding=padding.only(left=10),
                             width=200, height=40, text_size=12,
-                            border_color=Palette.ON_PRIMARY, focused_border_color=Palette.PRIMARY_VARIANT,
+                            # border_color=Palette.ON_PRIMARY, focused_border_color=Palette.PRIMARY_VARIANT,
                             suffix_icon=icons.SEARCH
                             )
                         ]
