@@ -257,7 +257,7 @@ if __name__ == "__main__":
         page.title = "InfoGraph Task Manager"
         page.padding = 0
         page.theme = theme.Theme(
-            color_scheme_seed='green',
+            color_scheme_seed='teal',
             font_family="Verdana"
             )
         page.theme.page_transitions.windows = "cupertino"
@@ -271,4 +271,4 @@ if __name__ == "__main__":
         info_app.initialize()
 
 
-    flet.app(target=main, assets_dir="../assets")
+    flet.app(target=main, assets_dir='../assets')

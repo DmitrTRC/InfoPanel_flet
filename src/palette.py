@@ -2,7 +2,7 @@ import flet as ft
 
 
 def show_theme_colors():
-    class Color:
+    class Color:  # TODO: refactor to dataclass
 
         def __init__(self, display_name, name='Theme colors', is_dark=False):
             self.name = name
