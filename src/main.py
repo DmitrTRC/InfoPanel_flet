@@ -148,8 +148,26 @@ class InfoApp(UserControl):
 
     def settings(self, e):
         from palette import show_theme_colors
+
+        def close_dlg(e):
+            dialog.open = False
+            self.page.update()
+
         theme_colors = show_theme_colors()
-        self.page.add(theme_colors)
+
+        dialog = AlertDialog(
+            title=Text("Theme Colors"),
+            content=Column(
+                [
+                    theme_colors,
+                    ElevatedButton(text="Close", on_click=close_dlg),
+                    ], tight=True
+                ),
+            on_dismiss=lambda e: print("Modal dialog dismissed!"),
+            )
+
+        self.page.dialog = dialog
+        dialog.open = True
         self.page.update()
 
     def route_change(self, e):
