@@ -13,6 +13,17 @@ class NaviBarApp(UserControl):
 
     def menu_choice_manager(self, message):
         print(f'Selected destination: {message.control.selected_index}')
+        match message.control.selected_index:
+            case 0:
+                print("Info Panel")
+            case 1:
+                print("Change User")
+            case 2:
+                print("Task Manager")
+            case 3:
+                print("Weather forecast ")
+
+        return message.control.selected_index
         # TODO: Implement reaction for each menu item ( try to use Python match )
 
     def build(self):
@@ -60,6 +71,5 @@ class NaviBarApp(UserControl):
                     ),
                 ],
             on_change=self.menu_choice_manager
-
             # TODO: HW4 Replace lambda expression to method menu_choice_manager()
             )
