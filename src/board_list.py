@@ -23,8 +23,8 @@ from flet import (
     colors,
     padding,
 )
-from item import Item
-from data_store import DataStore
+from src.item import Item
+from src.data_store import DataStore
 
 
 class BoardList(UserControl):

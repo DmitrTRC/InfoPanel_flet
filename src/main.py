@@ -1,10 +1,10 @@
 import flet as ft
 
-from app_layout import AppLayout
-from board import Board
-from data_store import DataStore
-from memory_store import InMemoryStore
-from user import User
+from src.app_layout import AppLayout
+from src.board import Board
+from src.data_store import DataStore
+from src.memory_store import InMemoryStore
+from src.user import User
 
 
 class InfoApp(ft.UserControl):
@@ -207,7 +207,7 @@ class InfoApp(ft.UserControl):
 
         :param e: The event object.
         """
-        from palette import show_theme_colors
+        from src.palette import show_theme_colors
 
         def close_dlg(e):
             """
@@ -256,7 +256,7 @@ class InfoApp(ft.UserControl):
         Returns:
             None
         """
-        t_route = ft.TemplateRoute(self.page.route)
+        t_route: ft.TemplateRoute = ft.TemplateRoute(self.page.route)
 
         if t_route.match('/'):
             self.page.go('/boards')

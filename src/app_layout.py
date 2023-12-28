@@ -18,10 +18,10 @@ from flet import (
     padding,
     border
     )
-from board import Board
-from data_store import DataStore
-from sidebar import Sidebar
-from WeatherWidget import WeatherWidget
+from src.board import Board
+from src.data_store import DataStore
+from src.sidebar import Sidebar
+from src.WeatherWidget import WeatherWidget
 
 
 class AppLayout(Row):

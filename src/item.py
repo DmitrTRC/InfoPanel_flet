@@ -1,7 +1,7 @@
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from board_list import BoardList
+    from src.board_list import BoardList
 import itertools
 from flet import (
     DragTarget,
@@ -13,7 +13,7 @@ from flet import (
     Card,
     border_radius,
 )
-from data_store import DataStore
+from src.data_store import DataStore
 
 
 class Item(UserControl):

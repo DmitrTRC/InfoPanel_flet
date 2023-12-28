@@ -19,8 +19,8 @@ from flet import (
     alignment,
     margin
 )
-from board_list import BoardList
-from data_store import DataStore
+from src.board_list import BoardList
+from src.data_store import DataStore
 
 
 class Board(UserControl):

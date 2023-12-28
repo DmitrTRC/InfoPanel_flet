@@ -16,7 +16,7 @@ from flet import (
     padding,
     margin,
     )
-from data_store import DataStore
+from src.data_store import DataStore
 
 
 # from palette import PaletteDark as Palette

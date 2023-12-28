@@ -5,7 +5,7 @@ from flet import (
     alignment, border_radius, colors, icons, padding, margin, TextButton, TextField, Text, Alignment
     )
 
-from OpenWeatherService import WeatherService
+from src.OpenWeatherService import WeatherService
 
 from pprint import pprint
 

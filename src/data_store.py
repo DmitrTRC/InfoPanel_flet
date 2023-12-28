@@ -1,10 +1,10 @@
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from board import Board
-    from board_list import BoardList
-    from user import User
-    from item import Item
+    from src.board import Board
+    from src.board_list import BoardList
+    from src.user import User
+    from src.item import Item
 
 
 class DataStore:
