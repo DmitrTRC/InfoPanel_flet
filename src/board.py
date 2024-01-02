@@ -22,8 +22,9 @@ class Board(ft.UserControl):
         self.board_lists = [
             self.add_list_button
             ]
-        for l in self.store.get_lists_by_board(self.board_id):
-            self.add_list(l)
+
+        for list_item in self.store.get_lists_by_board(self.board_id):
+            self.add_list(list_item)
 
         self.list_wrap = ft.Row(
             self.board_lists,
@@ -151,20 +152,20 @@ class Board(ft.UserControl):
 
     def remove_list(self, b_list: BoardList, e):
         self.board_lists.remove(b_list)
-        self.store.remove_list(self.board_id, list.board_list_id)
+        self.store.remove_list(self.board_id, b_list.board_list_id)
         self.update()
 
-    def add_list(self, list: BoardList):
-        self.board_lists.insert(-1, list)
-        self.store.add_list(self.board_id, list)
+    def add_list(self, b_list: BoardList):
+        self.board_lists.insert(-1, b_list)
+        self.store.add_list(self.board_id, b_list)
 
     def color_option_creator(self, color: str):
-        return Container(
+        return ft.Container(
             bgcolor=color,
-            border_radius=border_radius.all(50),
+            border_radius=ft.border_radius.all(50),
             height=10,
             width=10,
-            padding=padding.all(5),
-            alignment=alignment.center,
+            padding=ft.padding.all(5),
+            alignment=ft.alignment.center,
             data=color
             )
