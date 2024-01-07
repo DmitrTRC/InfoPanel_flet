@@ -1,53 +1,49 @@
-import flet
-
-from flet import (
-    Page, UserControl, Column, Container, Row, Text, IconButton, NavigationRail, NavigationRailDestination, TextField,
-    alignment, border_radius, colors, icons, padding, margin, TextButton, TextField, Text, Alignment
-    )
+import flet as ft
 
 from src.OpenWeatherService import WeatherService
 
 from pprint import pprint
 
 
-class WeatherWidget(UserControl):
+class WeatherWidget(ft.UserControl):
 
-    def __init__(self):
+    def __init__(self, page):
+
         super().__init__()
 
+        self.page = page
+        self.city_input = ft.TextField(label="Enter city name", width=300, value='Koltushi')
         self.view = None
         self.city = None
         self.weather_info = None
         self.weather_provider = WeatherService()
         self.get_weather_btn = None
+        self.get_weather_btn = ft.TextButton(text="Get Weather", on_click=self.update_weather_info)
+        self.weather_info = ft.Text()
 
     def build(self):
-        # UI components
-        self.city_input = TextField(label="Enter city name", width=300)
-        self.get_weather_btn = TextButton(text="Get Weather", on_click=self.update_weather_info)
-        self.weather_info = Text()
 
         # Layout
-        self.view = Column(
+        self.view = ft.Column(
             controls=[
-                Row(
+                ft.Row(
                     controls=[
                         self.city_input,
                         self.get_weather_btn
                         ],
-                    alignment='CENTER'
+                    alignment=ft.MainAxisAlignment.CENTER
                     ),
                 self.weather_info
                 ],
-            alignment='CENTER'
+            alignment=ft.MainAxisAlignment.START
             )
 
         return self.view
 
-    def update_weather_info(self):
+    def update_weather_info(self, e=None):
         # Fetch weather data and update UI
         self.city = self.city_input.value
-        weather_data = self.weather_provider.get_weather('Moscow')
+        weather_data = self.weather_provider.get_weather(self.city)
 
         pprint(weather_data)
 
@@ -58,3 +54,5 @@ class WeatherWidget(UserControl):
 
         else:
             self.weather_info.value = "Weather data not available."
+
+        self.page.update()
